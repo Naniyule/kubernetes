@@ -12,8 +12,7 @@ services:
       - ./backend:/app
     environment:
       PORT: 5000
-    networks:
-      - yoloo
+
     
   db:
     container_name: database_container
@@ -38,12 +37,8 @@ services:
       - backend
     volumes:
       - ./client:/app
-    networks:
-      - yoloo
 
-networks:
-  yoloo:
-    driver: default
+
 
 volumes:
   mongodb_vol:
