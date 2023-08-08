@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-client-deployment
+  labels:
+    app: yolo-client
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: yolo-client
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: yolo-client
+    spec:
+      containers:
+      - name: yolo-client
+        image: mchawi/node:yolo_client
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+          - mountPath: "/tmp"
+            name: yolo-client
+      volumes:
+      - name: yolo-client
+        persistentVolumeClaim:
+          claimName: yolo-pvc-file-system
+
+         
