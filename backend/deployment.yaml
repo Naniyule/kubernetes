@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: yolo-backend-deployment
   labels:
-    app: yolo-backend
+    app: yolo_backend
   namespace: default
 spec:
   selector:
@@ -15,11 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: yolo-backend
+        app: yolo_backend
     spec:
       containers:
       - name: yolo-backend
-        image: dgichaba/yolo-backend:v1.0.1
+        image: mchawi/node:yolo_backend
         ports:
         - containerPort: 5000
         resources:
@@ -30,7 +30,7 @@ spec:
             memory: 200Mi
         volumeMounts:
           - mountPath: "/tmp"
-            name: yolo-backend 
+            name: yolo_backend 
         env:
           - name: MONGODB_URI
             valueFrom: 
@@ -38,7 +38,7 @@ spec:
                 name: backend-secrets
                 key: MONGODB_URI
       volumes:
-      - name: yolo-backend
+      - name: yolo_backend
         persistentVolumeClaim:
           claimName: yolo-pvc-file-system
 
